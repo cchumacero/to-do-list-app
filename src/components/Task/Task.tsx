@@ -27,7 +27,9 @@ export const Task = ({ task, removeTask, completeTask }: Props) => {
         onClick={() => {
           removeTask(task.id);
         }}
-      ></button>
+      >
+        &#10006;
+      </button>
     </>
   );
 };
