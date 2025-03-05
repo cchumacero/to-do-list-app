@@ -1,11 +1,11 @@
-export interface Task {
-  id: string;
-  title: string;
-  completed: boolean;
-}
+export type TaskId = string
+export type TaskTitle = string
+export type TaskCompleted = boolean
 
-export type TaskId = Pick<Task, 'id'>
-export type TaskTitle = Pick<Task, 'title'>
-export type TaskCompleted = Pick<Task, 'completed'>
+export interface Task {
+  id: TaskId;
+  title: TaskTitle;
+  completed: TaskCompleted;
+}
 
 export type ListOfTasks = Task []
