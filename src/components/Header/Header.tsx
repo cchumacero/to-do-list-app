@@ -1,14 +1,13 @@
-import { CreateTask } from "../CreateTask/CreateTask";
-import { type TaskTitle } from "../../types";
+import { ReactNode } from "react";
 
 interface Props {
-  taskToAdd: ({ title }: TaskTitle) => void;
+  children: ReactNode;
 }
-export const Header = ({ taskToAdd }: Props) => {
+export const Header = ({ children }: Props) => {
   return (
     <header className="header">
       <h1>To Do List</h1>
-      <CreateTask saveTask={taskToAdd} />
+      {children}
     </header>
   );
 };

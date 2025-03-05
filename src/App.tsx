@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./App.css";
-import { Header, Tasks } from "./components";
+import { Header, CreateTask, Tasks } from "./components";
 import { type Task as TaskType, type TaskTitle } from "./types";
 
 const mockTasks = [
@@ -52,7 +52,9 @@ const App = () => {
   };
   return (
     <div className="task-list">
-      <Header taskToAdd={handleTaskToAdd} />
+      <Header>
+        <CreateTask saveTask={handleTaskToAdd} />
+      </Header>
       <Tasks
         completeTask={handleCompleted}
         removeTask={handleRemove}
