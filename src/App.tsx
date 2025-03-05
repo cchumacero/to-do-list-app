@@ -8,18 +8,7 @@ import {
   type TaskCompleted,
 } from "./types";
 
-const mockTasks: TaskType[] = [
-  {
-    id: "1",
-    title: "Hacer el task manager",
-    completed: false,
-  },
-  {
-    id: "2",
-    title: "task 2",
-    completed: false,
-  },
-];
+const mockTasks: TaskType[] = [];
 
 const App = () => {
   const [tasks, setTasks] = useState(mockTasks);
