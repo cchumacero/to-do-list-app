@@ -1,12 +1,12 @@
 import { Task } from "../Task/Task";
-import { type Task as TaskType } from "../../types";
+import { TaskCompleted, TaskId } from "../../types";
 import { type ListOfTasks } from "../../types";
 import "./Tasks.css";
 
 interface Props {
   tasks: ListOfTasks;
   removeTask: (id: string) => void;
-  completeTask: ({ id, completed }: Pick<TaskType, "id" | "completed">) => void;
+  completeTask: (id: TaskId, completed: TaskCompleted) => void;
 }
 
 export const Tasks = ({ tasks, removeTask, completeTask }: Props) => {
@@ -15,10 +15,7 @@ export const Tasks = ({ tasks, removeTask, completeTask }: Props) => {
       {tasks.map((task) => (
         <li className={`${task.completed ? "completed" : ""}`} key={task.id}>
           <Task
-            key={task.id}
-            id={task.id}
-            title={task.title}
-            completed={task.completed}
+            task={task}
             completeTask={completeTask}
             removeTask={removeTask}
           />

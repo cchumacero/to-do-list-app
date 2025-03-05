@@ -2,14 +2,14 @@ import { type TaskTitle } from "../../types";
 import { useState } from "react";
 
 interface Props {
-  saveTask: ({ title }: TaskTitle) => void;
+  saveTask: (title: TaskTitle) => void;
 }
 export const CreateTask = ({ saveTask }: Props) => {
   const [inputValue, setInputValue] = useState("");
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
-    saveTask({ title: inputValue });
+    saveTask(inputValue);
     setInputValue("");
   };
   return (

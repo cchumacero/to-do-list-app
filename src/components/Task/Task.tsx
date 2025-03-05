@@ -1,25 +1,31 @@
-import { type Task as TaskType } from "../../types";
+import {
+  type Task as TaskType,
+  type TaskId,
+  type TaskCompleted,
+} from "../../types";
 import "./Task.css";
 
-interface Props extends TaskType {
-  removeTask: (id: string) => void;
-  completeTask: ({ id, completed }: Pick<TaskType, "id" | "completed">) => void;
+interface Props {
+  task: TaskType;
+  removeTask: (id: TaskId) => void;
+  completeTask: (id: TaskId, completed: TaskCompleted) => void;
 }
-export const Task = ({ id, title, removeTask, completeTask }: Props) => {
+
+export const Task = ({ task, removeTask, completeTask }: Props) => {
   return (
     <>
       <input
         className="checkbox-task"
         type="checkbox"
-        onChange={(event) => {
-          completeTask({ id, completed: event.target.checked });
-        }}
+        onChange={(event: React.ChangeEvent<HTMLInputElement>): void =>
+          completeTask(task.id, event.target.checked)
+        }
       />
-      <span className="text">{title}</span>
+      <span className="text">{task.title}</span>
       <button
         className="btn-close"
         onClick={() => {
-          removeTask(id);
+          removeTask(task.id);
         }}
       ></button>
     </>

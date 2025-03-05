@@ -1,9 +1,14 @@
 import { useState } from "react";
 import "./App.css";
 import { Header, CreateTask, Tasks } from "./components";
-import { type Task as TaskType, type TaskTitle } from "./types";
+import {
+  type Task as TaskType,
+  type TaskTitle,
+  type TaskId,
+  type TaskCompleted,
+} from "./types";
 
-const mockTasks = [
+const mockTasks: TaskType[] = [
   {
     id: "1",
     title: "Hacer el task manager",
@@ -19,15 +24,12 @@ const mockTasks = [
 const App = () => {
   const [tasks, setTasks] = useState(mockTasks);
 
-  const handleRemove = (id: string): void => {
+  const handleRemove = (id: TaskId): void => {
     const newTasks = tasks.filter((task) => task.id != id);
     setTasks(newTasks);
   };
 
-  const handleCompleted = ({
-    id,
-    completed,
-  }: Pick<TaskType, "id" | "completed">): void => {
+  const handleCompleted = (id: TaskId, completed: TaskCompleted): void => {
     const newTasks = tasks.map((task) => {
       if (task.id == id) {
         return {
@@ -40,7 +42,7 @@ const App = () => {
     setTasks(newTasks);
   };
 
-  const handleTaskToAdd = ({ title }: TaskTitle): void => {
+  const handleTaskToAdd = (title: TaskTitle): void => {
     const newTask = {
       id: crypto.randomUUID(),
       title: title,
