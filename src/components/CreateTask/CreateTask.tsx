@@ -9,7 +9,7 @@ export const CreateTask = ({ saveTask }: Props) => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
-    saveTask(inputValue);
+    if (inputValue != "") saveTask(inputValue);
     setInputValue("");
   };
   return (
@@ -24,6 +24,9 @@ export const CreateTask = ({ saveTask }: Props) => {
           }}
           autoFocus
         />
+        <button type="submit" className="btn-add-task">
+          <span className="btn-add-task-text">+</span>
+        </button>
       </form>
     </div>
   );
