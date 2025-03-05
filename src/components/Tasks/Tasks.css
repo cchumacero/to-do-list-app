@@ -1,0 +1,7 @@
+.completed label {
+  text-decoration: line-through;
+}
+
+.tasks-list {
+  /*list-style-type: none;*/
+}
