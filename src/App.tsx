@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 import { Header, CreateTask, Tasks } from "./components";
 import {
@@ -8,14 +8,20 @@ import {
   type TaskCompleted,
 } from "./types";
 
-const mockTasks: TaskType[] = [];
-
 const App = () => {
-  const [tasks, setTasks] = useState(mockTasks);
+  const [tasks, setTasks] = useState<TaskType[]>(() => {
+    const item = localStorage.getItem("tasks");
+    return item ? JSON.parse(item) : [];
+  });
 
   const handleRemove = (id: TaskId): void => {
     const newTasks = tasks.filter((task) => task.id != id);
     setTasks(newTasks);
+    try {
+      window.localStorage.setItem("tasks", JSON.stringify(newTasks));
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleCompleted = (id: TaskId, completed: TaskCompleted): void => {
@@ -37,10 +43,15 @@ const App = () => {
       title: title,
       completed: false,
     };
-
     const newTasks = [...tasks, newTask];
-    setTasks(newTasks);
+    try {
+      setTasks(newTasks);
+      window.localStorage.setItem("tasks", JSON.stringify(newTasks));
+    } catch (error) {
+      console.log(error);
+    }
   };
+
   return (
     <div className="task-list">
       <Header>
